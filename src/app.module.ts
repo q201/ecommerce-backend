@@ -5,6 +5,12 @@ import { AppService } from './app.service';
 import { ProductsModule } from './products/products.module';
 import { UsersModule } from './users/users.module';
 import { OrdersModule } from './orders/orders.module';
+import { AuthModule } from './auth/auth.module';
+import { CartModule } from './cart/cart.module';
+import { CustomerModule } from './customer/customer.module';
+import { PaymentModule } from './payment/payment.module';
+import { FulfillmentModule } from './fulfillment/fulfillment.module';
+import { DiscountModule } from './discount/discount.module';
 
 @Module({
   imports: [
@@ -21,6 +27,12 @@ import { OrdersModule } from './orders/orders.module';
     ProductsModule,
     UsersModule,
     OrdersModule,
+    AuthModule,
+    CartModule,
+    CustomerModule,
+    PaymentModule,
+    FulfillmentModule,
+    DiscountModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { Review } from '../../products/entities/review.entity';
+
 
 export enum UserRole {
   CUSTOMER = 'customer',
@@ -77,6 +80,9 @@ export class User {
 
   @Column({ type: 'timestamp', nullable: true })
   lastLogin: Date;
+
+  @OneToMany(() => Review, (review: Review) => review.user)
+  reviews: Review[];
 
   @CreateDateColumn()
   createdAt: Date;
