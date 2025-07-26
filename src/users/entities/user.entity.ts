@@ -7,6 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Review } from '../../products/entities/review.entity';
+import { Address } from '../../address/entities/address.entity';
 
 
 export enum UserRole {
@@ -23,7 +24,7 @@ export class User {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ select: false })
   passwordHash: string;
 
   @Column({ nullable: true })
@@ -47,24 +48,6 @@ export class User {
   @Column({ nullable: true })
   gender: string; // or ENUM('male', 'female', 'other')
 
-  @Column({ nullable: true })
-  addressLine1: string;
-
-  @Column({ nullable: true })
-  addressLine2: string;
-
-  @Column({ nullable: true })
-  city: string;
-
-  @Column({ nullable: true })
-  state: string;
-
-  @Column({ nullable: true })
-  postalCode: string;
-
-  @Column({ nullable: true })
-  country: string;
-
   @Column({
     type: 'enum',
     enum: UserRole,
@@ -83,6 +66,9 @@ export class User {
 
   @OneToMany(() => Review, (review: Review) => review.user)
   reviews: Review[];
+
+  @OneToMany(() => Address, (address) => address.user)
+  addresses: Address[];
 
   @CreateDateColumn()
   createdAt: Date;

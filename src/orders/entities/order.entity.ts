@@ -10,20 +10,26 @@ import {
 } from 'typeorm';
 import { OrderItem } from './order-item.entity';
 import { OrderAddress } from './order-address.entity';
+import { User } from '../../users/entities/user.entity';
+
+export enum OrderStatus {
+  PENDING = 'pending',
+  PAID = 'paid',
+  SHIPPED = 'shipped',
+  DELIVERED = 'delivered',
+  CANCELLED = 'cancelled',
+}
 
 @Entity()
 export class Order {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ nullable: true })
-  status: string;
+  @Column({ type: 'enum', enum: OrderStatus, default: OrderStatus.PENDING })
+  status: OrderStatus;
 
   @Column({ nullable: true })
   currency_code: string;
-
-  @Column({ nullable: true })
-  customer_id: string;
 
   @Column({ nullable: true })
   email: string;
@@ -68,6 +74,9 @@ export class Order {
   @ManyToOne(() => OrderAddress)
   @JoinColumn({ name: 'shipping_address_id' })
   shipping_address: OrderAddress;
+
+  @ManyToOne(() => User)
+  customer: User;
 
   // @OneToMany(() => Discount, discount => discount.order)
   // discounts: Discount[];

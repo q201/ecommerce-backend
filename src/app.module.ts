@@ -11,6 +11,17 @@ import { CustomerModule } from './customer/customer.module';
 import { PaymentModule } from './payment/payment.module';
 import { FulfillmentModule } from './fulfillment/fulfillment.module';
 import { DiscountModule } from './discount/discount.module';
+import { AddressModule } from './address/address.module';
+import { InventoryModule } from './inventory/inventory.module';
+import { NotificationsModule } from './notifications/notifications.module';
+import { AnalyticsModule } from './analytics/analytics.module';
+import { ReviewsModule } from './reviews/reviews.module';
+import { WishlistModule } from './wishlist/wishlist.module';
+import { SearchModule } from './search/search.module';
+import { ShippingModule } from './shipping/shipping.module';
+import { ReturnsModule } from './returns/returns.module';
+import { TaxModule } from './tax/tax.module';
+import { VendorsModule } from './vendors/vendors.module';
 
 @Module({
   imports: [
@@ -33,6 +44,17 @@ import { DiscountModule } from './discount/discount.module';
     PaymentModule,
     FulfillmentModule,
     DiscountModule,
+    AddressModule,
+    InventoryModule,
+    NotificationsModule,
+    AnalyticsModule,
+    ReviewsModule,
+    WishlistModule,
+    SearchModule,
+    ShippingModule,
+    ReturnsModule,
+    TaxModule,
+    VendorsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

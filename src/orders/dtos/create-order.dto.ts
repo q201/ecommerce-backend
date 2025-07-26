@@ -1,5 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+export class CreateOrderItemDto {
+  @ApiProperty()
+  product_id: string;
+
+  @ApiProperty()
+  quantity: number;
+}
+
 export class CreateOrderDto {
   @ApiProperty()
   customerId: string;
@@ -9,4 +17,7 @@ export class CreateOrderDto {
 
   @ApiProperty({ default: 'pending' })
   status?: string;
+
+  @ApiProperty({ type: [CreateOrderItemDto] })
+  items?: CreateOrderItemDto[];
 }
