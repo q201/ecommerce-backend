@@ -61,18 +61,22 @@ const ProductDetail: React.FC = () => {
           {
             id: '1',
             rating: 5,
+            title: 'Excellent Sound Quality',
             comment: 'Excellent sound quality and very comfortable for long listening sessions.',
             user: { id: '1', email: 'user1@example.com', role: 'customer' as any, isVerified: true, isActive: true, createdAt: new Date(), updatedAt: new Date() },
             product: {} as Product,
             createdAt: new Date(),
+            updatedAt: new Date(),
           },
           {
             id: '2',
             rating: 4,
+            title: 'Great Headphones',
             comment: 'Great headphones, battery life is impressive. Only minor issue is the size.',
             user: { id: '2', email: 'user2@example.com', role: 'customer' as any, isVerified: true, isActive: true, createdAt: new Date(), updatedAt: new Date() },
             product: {} as Product,
             createdAt: new Date(),
+            updatedAt: new Date(),
           },
         ],
         variants: [

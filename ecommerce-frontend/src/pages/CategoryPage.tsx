@@ -189,7 +189,7 @@ const CategoryPage: React.FC = () => {
                         <input
                           type="checkbox"
                           checked={filters.brand === brand}
-                          onChange={(e) => handleFilterChange('brand', e.target.checked ? brand : '')}
+                          onChange={(e) => handleFilterChange('brand', e.target.checked ? brand || '' : '')}
                           className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                         />
                         <span className="ml-2 text-sm text-gray-700">{brand}</span>

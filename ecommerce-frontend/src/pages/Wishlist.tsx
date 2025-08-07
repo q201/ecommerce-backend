@@ -110,7 +110,7 @@ const Wishlist: React.FC = () => {
 
   const moveToCart = async (product: Product) => {
     try {
-      await addToCart(product.id, 1);
+      await addToCart(product, 1);
       // Optionally remove from wishlist after adding to cart
       // removeFromWishlist(product.id);
     } catch (err: any) {

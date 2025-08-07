@@ -286,7 +286,7 @@ const OrderDetail: React.FC = () => {
                   <span className={`font-medium ${
                     order.payment_status === 'paid' ? 'text-green-600' : 'text-yellow-600'
                   }`}>
-                    {order.payment_status?.charAt(0).toUpperCase() + order.payment_status?.slice(1) || 'Pending'}
+                    {(order.payment_status?.charAt(0).toUpperCase() || '') + (order.payment_status?.slice(1) || '') || 'Pending'}
                   </span>
                 </div>
                 <div className="flex justify-between">
@@ -294,7 +294,7 @@ const OrderDetail: React.FC = () => {
                   <span className={`font-medium ${
                     order.fulfillment_status === 'fulfilled' ? 'text-green-600' : 'text-yellow-600'
                   }`}>
-                    {order.fulfillment_status?.charAt(0).toUpperCase() + order.fulfillment_status?.slice(1) || 'Pending'}
+                    {(order.fulfillment_status?.charAt(0).toUpperCase() || '') + (order.fulfillment_status?.slice(1) || '') || 'Pending'}
                   </span>
                 </div>
               </div>

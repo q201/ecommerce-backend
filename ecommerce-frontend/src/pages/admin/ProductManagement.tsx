@@ -66,10 +66,25 @@ const ProductManagement: React.FC = () => {
 
     try {
       const productData = {
-        ...productForm,
+        name: productForm.name,
+        description: productForm.description,
         price: parseFloat(productForm.price),
         discountPrice: productForm.discountPrice ? parseFloat(productForm.discountPrice) : undefined,
         stock: parseInt(productForm.stock),
+        sku: productForm.sku,
+        brand: productForm.brand || undefined,
+        isActive: productForm.isActive,
+        currency: 'USD',
+        slug: productForm.name.toLowerCase().replace(/\s+/g, '-'),
+        category: categories.find(c => c.id === productForm.categoryId)!,
+        images: productForm.images.map((url, index) => ({
+          id: `temp-${index}`,
+          url,
+          alt: productForm.name,
+          isPrimary: index === 0
+        })),
+        reviews: [],
+        variants: [],
       };
 
       if (editingProduct) {
@@ -110,7 +125,7 @@ const ProductManagement: React.FC = () => {
       discountPrice: product.discountPrice?.toString() || '',
       sku: product.sku,
       stock: product.stock.toString(),
-      brand: product.brand,
+      brand: product.brand || '',
       categoryId: product.category.id,
       isActive: product.isActive,
       images: product.images.map(img => img.url),

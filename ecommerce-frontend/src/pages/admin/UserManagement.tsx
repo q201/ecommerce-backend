@@ -103,8 +103,8 @@ const UserManagement: React.FC = () => {
   const editUser = (user: User) => {
     setSelectedUser(user);
     setEditForm({
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstName: user.firstName || '',
+      lastName: user.lastName || '',
       email: user.email,
       phoneNumber: user.phoneNumber || '',
       role: user.role,
@@ -128,8 +128,8 @@ const UserManagement: React.FC = () => {
   };
 
   const filteredUsers = users.filter(user => {
-    const matchesSearch = user.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         user.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    const matchesSearch = (user.firstName?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
+                         (user.lastName?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
                          user.email.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesRole = !selectedRole || user.role === selectedRole;
     const matchesStatus = selectedStatus === '' || 

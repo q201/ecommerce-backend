@@ -86,7 +86,11 @@ const UserProfile: React.FC = () => {
     setSuccess('');
 
     try {
-      await updateUser(user!.id, profileForm);
+      const updateData = {
+        ...profileForm,
+        dateOfBirth: profileForm.dateOfBirth ? new Date(profileForm.dateOfBirth) : undefined
+      };
+      await updateUser(user!.id, updateData);
       setSuccess('Profile updated successfully!');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Failed to update profile');
