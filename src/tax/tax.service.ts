@@ -169,7 +169,7 @@ export class TaxService {
     // Check if item is exempt
     const itemExemptions = exemptions.filter(ex => 
       ex.applicableProducts?.includes(item.productId) ||
-      ex.applicableCategories?.includes(item.category)
+      (item.category !== undefined && item.category !== null && ex.applicableCategories?.includes(item.category))
     );
 
     if (itemExemptions.length > 0) {
@@ -192,7 +192,13 @@ export class TaxService {
     const taxCategory = await this.getProductTaxCategory(item);
     
     // Calculate tax for each applicable rate
-    const taxBreakdown = [];
+    const taxBreakdown: {
+      rateId: string;
+      rateName: string;
+      rateType: any;
+      rate: number;
+      amount: number;
+    }[] = [];
     let totalTax = 0;
 
     for (const rate of taxRates) {

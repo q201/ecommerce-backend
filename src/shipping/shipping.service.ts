@@ -71,7 +71,7 @@ export class ShippingService {
     };
   }
 
-  async findShippingZone(address: AddressDto): Promise<ShippingZone> {
+  async findShippingZone(address: AddressDto): Promise<ShippingZone | null> {
     const zones = await this.shippingZoneRepository.find({
       where: { isActive: true },
     });

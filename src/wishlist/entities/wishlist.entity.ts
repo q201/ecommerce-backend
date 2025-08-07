@@ -1,13 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { WishlistItem } from './wishlist-item.entity';
+import { User } from '../../users/entities/user.entity';
 
 @Entity()
 export class Wishlist {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  userId: string;
+  @ManyToOne(() => User, user => user.wishlists, { nullable: false })
+  @JoinColumn({ name: 'userId' }) // ✅ FK column is userId
+  user: User;
 
   @Column()
   name: string;
@@ -38,4 +40,4 @@ export class Wishlist {
 
   @OneToMany(() => WishlistItem, item => item.wishlist)
   items: WishlistItem[];
-} 
+}

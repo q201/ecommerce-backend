@@ -34,6 +34,7 @@ import { VendorsModule } from './vendors/vendors.module';
       database: 'ecommerce_db',
       autoLoadEntities: true,
       synchronize: true,
+      logging: true,
     }),
     ProductsModule,
     UsersModule,

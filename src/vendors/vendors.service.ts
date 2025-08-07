@@ -104,13 +104,21 @@ export class VendorsService {
 
     if (status === VendorStatus.APPROVED) {
       vendor.approvedAt = new Date();
-      vendor.approvedBy = adminId;
+      if (adminId !== undefined && adminId !== null) {
+        vendor.approvedBy = adminId;
+      }
     } else if (status === VendorStatus.SUSPENDED) {
       vendor.suspendedAt = new Date();
-      vendor.suspendedBy = adminId;
-      vendor.suspensionReason = reason;
+      if (adminId !== undefined && adminId !== null) {
+        vendor.suspendedBy = adminId;
+      }
+      if (reason !== undefined && reason !== null) {
+        vendor.suspensionReason = reason;
+      }
     } else if (status === VendorStatus.REJECTED) {
-      vendor.rejectionReason = reason;
+      if (reason !== undefined && reason !== null) {
+        vendor.rejectionReason = reason;
+      }
     }
 
     return await this.vendorRepository.save(vendor);

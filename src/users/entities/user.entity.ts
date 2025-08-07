@@ -70,6 +70,9 @@ export class User {
   @OneToMany(() => Address, (address) => address.user)
   addresses: Address[];
 
+  @OneToMany(() => Wishlist, wishlist => wishlist.user)
+wishlists: Wishlist[];
+
   @CreateDateColumn()
   createdAt: Date;
 
