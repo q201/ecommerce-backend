@@ -87,20 +87,27 @@ const Header: React.FC = () => {
 
             {/* User Menu */}
             {isAuthenticated ? (
-              <div className="relative">
+              <div className="relative group">
                 <button className="flex items-center space-x-2 text-gray-700 hover:text-primary-600">
                   <UserIcon className="h-6 w-6" />
                   <span className="hidden sm:block text-sm font-medium">
                     {user?.firstName || user?.email}
                   </span>
                 </button>
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                    Profile
+                    My Profile
                   </Link>
                   <Link to="/orders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     My Orders
                   </Link>
+                  <Link to="/wishlist" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Wishlist
+                  </Link>
+                  <Link to="/reviews" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    My Reviews
+                  </Link>
+                  <div className="border-t border-gray-100 my-1"></div>
                   <button
                     onClick={handleLogout}
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -160,13 +167,36 @@ const Header: React.FC = () => {
                 Categories
               </Link>
               {isAuthenticated && (
-                <Link
-                  to="/orders"
-                  className="block px-3 py-2 text-gray-700 hover:text-primary-600"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Orders
-                </Link>
+                <>
+                  <Link
+                    to="/profile"
+                    className="block px-3 py-2 text-gray-700 hover:text-primary-600"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    My Profile
+                  </Link>
+                  <Link
+                    to="/orders"
+                    className="block px-3 py-2 text-gray-700 hover:text-primary-600"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    My Orders
+                  </Link>
+                  <Link
+                    to="/wishlist"
+                    className="block px-3 py-2 text-gray-700 hover:text-primary-600"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Wishlist
+                  </Link>
+                  <Link
+                    to="/reviews"
+                    className="block px-3 py-2 text-gray-700 hover:text-primary-600"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    My Reviews
+                  </Link>
+                </>
               )}
             </div>
           </div>

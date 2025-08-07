@@ -168,6 +168,40 @@ class ApiService {
     const response: AxiosResponse<Product[]> = await this.api.get(`/search?q=${encodeURIComponent(query)}`);
     return response.data;
   }
+
+  // Wishlist endpoints
+  async getWishlist(): Promise<Product[]> {
+    const response: AxiosResponse<Product[]> = await this.api.get('/wishlist');
+    return response.data;
+  }
+
+  async addToWishlist(productId: string): Promise<void> {
+    await this.api.post('/wishlist', { productId });
+  }
+
+  async removeFromWishlist(productId: string): Promise<void> {
+    await this.api.delete(`/wishlist/${productId}`);
+  }
+
+  // Review endpoints
+  async getUserReviews(): Promise<any[]> {
+    const response: AxiosResponse<any[]> = await this.api.get('/reviews/user');
+    return response.data;
+  }
+
+  async updateReview(reviewId: string, reviewData: { rating: number; title: string; comment: string }): Promise<any> {
+    const response: AxiosResponse<any> = await this.api.patch(`/reviews/${reviewId}`, reviewData);
+    return response.data;
+  }
+
+  async deleteReview(reviewId: string): Promise<void> {
+    await this.api.delete(`/reviews/${reviewId}`);
+  }
+
+  // Password change endpoint
+  async changePassword(passwordData: { currentPassword: string; newPassword: string }): Promise<void> {
+    await this.api.post('/auth/change-password', passwordData);
+  }
 }
 
 export const apiService = new ApiService();

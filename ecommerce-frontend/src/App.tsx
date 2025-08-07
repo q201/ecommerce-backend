@@ -10,6 +10,12 @@ import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import UserProfile from './pages/UserProfile';
+import OrderDetail from './pages/OrderDetail';
+import SearchResults from './pages/SearchResults';
+import Wishlist from './pages/Wishlist';
+import Reviews from './pages/Reviews';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -25,7 +31,12 @@ function App() {
               <Route path="/product/:slug" element={<ProductDetail />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
-              {/* Add more routes here as we create more pages */}
+              <Route path="/profile" element={<UserProfile />} />
+              <Route path="/order/:id" element={<OrderDetail />} />
+              <Route path="/search" element={<SearchResults />} />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/admin" element={<AdminDashboard />} />
             </Routes>
           </Layout>
         </CartProvider>
