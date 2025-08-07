@@ -1,98 +1,254 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🛍️ ShopHub - Full Stack E-commerce Application
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A complete e-commerce platform built with **NestJS** (Backend) and **React** (Frontend).
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🚀 Features
 
-## Description
+### Backend (NestJS)
+- **Authentication & Authorization** - JWT-based auth with role-based access
+- **User Management** - Customer, Admin, and Seller roles
+- **Product Management** - CRUD operations with categories and variants
+- **Order Management** - Complete order lifecycle
+- **Shopping Cart** - Persistent cart functionality
+- **Payment Integration** - Ready for Stripe integration
+- **Review System** - Product reviews and ratings
+- **Wishlist** - User wishlist management
+- **Search & Filtering** - Advanced product search
+- **Admin Dashboard** - Complete admin interface
+- **API Documentation** - Swagger/OpenAPI docs
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Frontend (React)
+- **Modern UI** - Beautiful Tailwind CSS design
+- **Responsive Design** - Mobile-first approach
+- **User Authentication** - Login/Register with JWT
+- **Product Catalog** - Grid/List views with filtering
+- **Shopping Cart** - Real-time cart management
+- **Checkout Process** - Multi-step checkout
+- **User Profile** - Complete user management
+- **Admin Panel** - Product, Order, and User management
+- **Wishlist** - Save and manage favorite products
+- **Reviews** - Product review system
+- **Search** - Advanced search functionality
 
-## Project setup
+## 🛠️ Tech Stack
 
+### Backend
+- **Framework**: NestJS
+- **Language**: TypeScript
+- **Database**: PostgreSQL with TypeORM
+- **Authentication**: JWT with Passport.js
+- **Documentation**: Swagger/OpenAPI
+- **Testing**: Jest
+
+### Frontend
+- **Framework**: React 19
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Routing**: React Router v6
+- **State Management**: React Context API
+- **HTTP Client**: Axios
+- **Icons**: Heroicons
+
+## 📦 Installation
+
+### Prerequisites
+- Node.js (v18 or higher)
+- PostgreSQL
+- npm or yarn
+
+### Backend Setup
+
+1. **Clone the repository**
 ```bash
-$ npm install
+git clone <your-repo-url>
+cd your-repo-name
 ```
 
-## Compile and run the project
-
+2. **Install dependencies**
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
-
+3. **Set up environment variables**
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cp .env.example .env
+# Edit .env with your database credentials
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+4. **Database setup**
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Create PostgreSQL database
+createdb ecommerce_db
+
+# Run migrations (if using TypeORM migrations)
+npm run migration:run
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+5. **Start the backend**
+```bash
+npm run start:dev
+```
 
-## Resources
+The backend will run on `http://localhost:3000`
 
-Check out a few resources that may come in handy when working with NestJS:
+### Frontend Setup
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+1. **Navigate to frontend directory**
+```bash
+cd ecommerce-frontend
+```
 
-## Support
+2. **Install dependencies**
+```bash
+npm install
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+3. **Set up environment variables**
+```bash
+cp .env.example .env
+# Edit .env with your API URL
+```
 
-## Stay in touch
+4. **Start the frontend**
+```bash
+npm start
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+The frontend will run on `http://localhost:3001`
 
-## License
+## 🔧 Environment Variables
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Backend (.env)
+```env
+# Database
+DB_HOST=localhost
+DB_PORT=5432
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+DB_DATABASE=ecommerce_db
+
+# JWT
+JWT_SECRET=your_super_secret_jwt_key
+JWT_EXPIRES_IN=7d
+
+# App
+PORT=3000
+NODE_ENV=development
+CORS_ORIGIN=http://localhost:3001
+```
+
+### Frontend (.env)
+```env
+REACT_APP_API_URL=http://localhost:3000
+REACT_APP_NAME=ShopHub
+REACT_APP_ENABLE_MOCK_DATA=true
+```
+
+## 📚 API Documentation
+
+Once the backend is running, visit:
+- **Swagger UI**: `http://localhost:3000/api`
+- **API Endpoints**: All RESTful endpoints documented
+
+## 🗄️ Database Schema
+
+The application includes the following main entities:
+- **Users** - Customer, Admin, Seller roles
+- **Products** - With categories, images, variants
+- **Orders** - Complete order management
+- **Cart** - Shopping cart functionality
+- **Reviews** - Product reviews and ratings
+- **Addresses** - User address management
+- **Categories** - Product categorization
+
+## 🚀 Deployment
+
+### Backend Deployment
+```bash
+# Build the application
+npm run build
+
+# Start production server
+npm run start:prod
+```
+
+### Frontend Deployment
+```bash
+# Build for production
+npm run build
+
+# Serve the build folder
+npm install -g serve
+serve -s build -l 3001
+```
+
+## 🧪 Testing
+
+### Backend Tests
+```bash
+# Unit tests
+npm run test
+
+# E2E tests
+npm run test:e2e
+
+# Test coverage
+npm run test:cov
+```
+
+### Frontend Tests
+```bash
+npm test
+```
+
+## 📁 Project Structure
+
+```
+├── src/                    # Backend source code
+│   ├── auth/              # Authentication module
+│   ├── users/             # User management
+│   ├── products/          # Product management
+│   ├── orders/            # Order management
+│   ├── cart/              # Shopping cart
+│   ├── reviews/           # Review system
+│   ├── categories/        # Category management
+│   └── database/          # Database configuration
+├── ecommerce-frontend/    # Frontend React app
+│   ├── src/
+│   │   ├── components/    # Reusable components
+│   │   ├── pages/         # Page components
+│   │   ├── context/       # React context
+│   │   ├── services/      # API services
+│   │   ├── types/         # TypeScript types
+│   │   └── utils/         # Utility functions
+│   └── public/            # Static assets
+└── docs/                  # Documentation
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+If you have any questions or need help, please open an issue on GitHub.
+
+## 🙏 Acknowledgments
+
+- [NestJS](https://nestjs.com/) - Progressive Node.js framework
+- [React](https://reactjs.org/) - JavaScript library for building user interfaces
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [TypeORM](https://typeorm.io/) - ORM for TypeScript and JavaScript
+- [Unsplash](https://unsplash.com/) - Beautiful free images
+
+---
+
+**Happy Coding! 🎉**
