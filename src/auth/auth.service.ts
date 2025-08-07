@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException, UnauthorizedException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Auth } from './entities/auth.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { RegisterDto } from './dtos/register.dto';
-import { LoginDto } from './dtos/login.dto';
+import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -15,15 +15,31 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async register(registerDto: RegisterDto): Promise<Auth> {
+  async register(registerDto: RegisterDto): Promise<{ user: Auth; access_token: string }> {
     const { email, password, role } = registerDto;
+    
+    // Check if user already exists
+    const existingUser = await this.authRepository.findOne({ where: { email } });
+    if (existingUser) {
+      throw new ConflictException('User with this email already exists');
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = this.authRepository.create({
       email,
       password: hashedPassword,
       role,
     });
-    return this.authRepository.save(user);
+    
+    const savedUser = await this.authRepository.save(user);
+    
+    const payload = { email: savedUser.email, sub: savedUser.id, role: savedUser.role };
+    const access_token = this.jwtService.sign(payload);
+    
+    return {
+      user: savedUser,
+      access_token,
+    };
   }
 
   async validateUser(email: string, password: string): Promise<Auth | null> {
@@ -34,14 +50,26 @@ export class AuthService {
     return null;
   }
 
-  async login(loginDto: LoginDto): Promise<{ access_token: string }> {
+  async login(loginDto: LoginDto): Promise<{ user: Auth; access_token: string }> {
     const user = await this.validateUser(loginDto.email, loginDto.password);
     if (!user) {
-      throw new Error('Invalid credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
+    
     const payload = { email: user.email, sub: user.id, role: user.role };
+    const access_token = this.jwtService.sign(payload);
+    
     return {
-      access_token: this.jwtService.sign(payload),
+      user,
+      access_token,
     };
+  }
+
+  async findById(id: string): Promise<Auth> {
+    const user = await this.authRepository.findOne({ where: { id } });
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+    return user;
   }
 }

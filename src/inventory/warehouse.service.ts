@@ -21,7 +21,8 @@ export class WarehouseService {
     }
 
     const warehouse = this.warehouseRepository.create(createWarehouseDto);
-    return await this.warehouseRepository.save(warehouse);
+    const savedWarehouse = await this.warehouseRepository.save(warehouse);
+    return Array.isArray(savedWarehouse) ? savedWarehouse[0] : savedWarehouse;
   }
 
   async findAll(): Promise<Warehouse[]> {

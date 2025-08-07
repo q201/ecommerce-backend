@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, Not } from 'typeorm';
 import { Wishlist } from './entities/wishlist.entity';
 import { WishlistItem } from './entities/wishlist-item.entity';
 import { CreateWishlistDto } from './dtos/create-wishlist.dto';
@@ -86,7 +86,7 @@ export class WishlistService {
     // If setting as default, remove default from other wishlists
     if (updateData.isDefault) {
       await this.wishlistRepository.update(
-        { userId, isDefault: true, id: { $ne: id } },
+        { userId, isDefault: true, id: Not(id) },
         { isDefault: false }
       );
     }
@@ -257,7 +257,7 @@ export class WishlistService {
 
     // Get most popular products
     analytics.mostPopularProducts = Object.entries(productCounts)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([,a], [,b]) => (b as number) - (a as number))
       .slice(0, 10)
       .map(([productId, count]) => ({ productId, count }));
 

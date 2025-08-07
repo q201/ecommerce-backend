@@ -3,6 +3,7 @@ import { Category } from './category.entity';
 import { ProductImage } from './product-image.entity';
 import { Review } from './review.entity';
 import { Variant } from './variant.entity';
+import { Inventory } from '../../inventory/entities/inventory.entity';
 
 @Entity()
 export class Product {
@@ -50,6 +51,9 @@ export class Product {
 
   @OneToMany(() => Variant, (variant) => variant.product, { cascade: true })
   variants: Variant[];
+
+  @OneToMany(() => Inventory, (inventory) => inventory.product)
+  inventories: Inventory[];
 
   @CreateDateColumn()
   createdAt: Date;

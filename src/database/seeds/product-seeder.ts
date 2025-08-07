@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Product } from '../../products/entities/product.entity';
-import { Category } from '../../categories/entities/category.entity';
+import { Category } from '../../products/entities/category.entity';
 import { ProductImage } from '../../products/entities/product-image.entity';
 
 export class ProductSeeder {
@@ -145,7 +145,7 @@ export class ProductSeeder {
       { name: 'Beauty & Health', description: 'Beauty products and health items', slug: 'beauty-health' }
     ];
 
-    const savedCategories = [];
+    const savedCategories: Category[] = [];
     for (const categoryData of categories) {
       const category = categoryRepository.create(categoryData);
       const savedCategory = await categoryRepository.save(category);
