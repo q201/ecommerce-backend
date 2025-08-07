@@ -1,6 +1,10 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+<<<<<<< HEAD
+import { Repository, Not } from 'typeorm';
+=======
 import { Repository,Not } from 'typeorm';
+>>>>>>> master
 import { Wishlist } from './entities/wishlist.entity';
 import { WishlistItem } from './entities/wishlist-item.entity';
 import { CreateWishlistDto } from './dtos/create-wishlist.dto';
@@ -265,8 +269,13 @@ export class WishlistService {
     analytics.priceRange.average = itemCount > 0 ? totalPrice / itemCount : 0;
 
     // Get most popular products
+<<<<<<< HEAD
+    analytics.mostPopularProducts = Object.entries(productCounts)
+      .sort(([,a], [,b]) => (b as number) - (a as number))
+=======
     analytics.mostPopularProducts = (Object.entries(productCounts) as [string, number][])
       .sort(([,a], [,b]) => b - a)
+>>>>>>> master
       .slice(0, 10)
       .map(([productId, count]) => ({ productId, count }));
 

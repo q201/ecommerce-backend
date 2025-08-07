@@ -11,7 +11,11 @@ import { Category } from './category.entity';
 import { ProductImage } from './product-image.entity';
 import { Review } from './review.entity';
 import { Variant } from './variant.entity';
+<<<<<<< HEAD
+import { Inventory } from '../../inventory/entities/inventory.entity';
+=======
 import { Inventory } from '../../inventory/entities/inventory.entity'; // adjust path as needed
+>>>>>>> master
 
 @Entity()
 export class Product {
@@ -59,7 +63,11 @@ export class Product {
   @OneToMany(() => Variant, (variant) => variant.product, { cascade: true })
   variants: Variant[];
 
+<<<<<<< HEAD
+  @OneToMany(() => Inventory, (inventory) => inventory.product)
+=======
   @OneToMany(() => Inventory, inventory => inventory.product)
+>>>>>>> master
   inventories: Inventory[];
 
   @CreateDateColumn()
