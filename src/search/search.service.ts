@@ -223,31 +223,34 @@ export class SearchService {
     // Apply filters
     let filteredProducts = mockProducts;
 
-    if (searchQueryDto.priceRange) {
+    if (searchQueryDto.priceRange !== undefined && searchQueryDto.priceRange !== null) {
       filteredProducts = filteredProducts.filter(product => {
-        if (searchQueryDto.priceRange.min && product.price < searchQueryDto.priceRange.min) return false;
-        if (searchQueryDto.priceRange.max && product.price > searchQueryDto.priceRange.max) return false;
+        if (searchQueryDto.priceRange?.min !== undefined && searchQueryDto.priceRange.min !== null && product.price < searchQueryDto.priceRange.min) return false;
+        if (searchQueryDto.priceRange?.max !== undefined && searchQueryDto.priceRange.max !== null && product.price > searchQueryDto.priceRange.max) return false;
         return true;
       });
     }
 
-    if (searchQueryDto.category) {
+    if (searchQueryDto?.category) {
+      const categoryLower = searchQueryDto.category.toLowerCase();
       filteredProducts = filteredProducts.filter(product => 
-        product.category.toLowerCase().includes(searchQueryDto.category.toLowerCase())
+        product.category.toLowerCase().includes(categoryLower)
       );
     }
 
-    if (searchQueryDto.brand) {
+    if (searchQueryDto?.brand) {
+      const brandLower = searchQueryDto.brand.toLowerCase();
       filteredProducts = filteredProducts.filter(product => 
-        product.brand.toLowerCase().includes(searchQueryDto.brand.toLowerCase())
+        product.brand.toLowerCase().includes(brandLower)
       );
     }
 
-    if (searchQueryDto.minRating) {
-      filteredProducts = filteredProducts.filter(product => product.rating >= searchQueryDto.minRating);
+    if (searchQueryDto?.minRating !== undefined && searchQueryDto?.minRating !== null) {
+      const minRating = searchQueryDto.minRating;
+      filteredProducts = filteredProducts.filter(product => product.rating >= minRating);
     }
 
-    if (searchQueryDto.availability) {
+    if (searchQueryDto.availability !== undefined && searchQueryDto.availability !== null) {
       filteredProducts = filteredProducts.filter(product => {
         switch (searchQueryDto.availability) {
           case 'in_stock': return product.inStock;
@@ -258,10 +261,11 @@ export class SearchService {
     }
 
     // Apply sorting
-    if (searchQueryDto.sortBy) {
+    if (searchQueryDto.sortBy !== undefined && searchQueryDto.sortBy !== null) {
+      const sortBy = searchQueryDto.sortBy;
       filteredProducts.sort((a, b) => {
-        const aValue = a[searchQueryDto.sortBy];
-        const bValue = b[searchQueryDto.sortBy];
+        const aValue = a[sortBy] ?? 0;
+        const bValue = b[sortBy] ?? 0;
         
         if (searchQueryDto.sortOrder === 'desc') {
           return bValue > aValue ? 1 : -1;

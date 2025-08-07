@@ -1,8 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 import { Category } from './category.entity';
 import { ProductImage } from './product-image.entity';
 import { Review } from './review.entity';
 import { Variant } from './variant.entity';
+import { Inventory } from '../../inventory/entities/inventory.entity'; // adjust path as needed
 
 @Entity()
 export class Product {
@@ -30,8 +39,7 @@ export class Product {
   @Column()
   sku: string;
 
-  @Column("int")
-  stock: number;
+  // Removed `stock` field to avoid duplication
 
   @Column({ default: true })
   isActive: boolean;
@@ -50,6 +58,9 @@ export class Product {
 
   @OneToMany(() => Variant, (variant) => variant.product, { cascade: true })
   variants: Variant[];
+
+  @OneToMany(() => Inventory, inventory => inventory.product)
+  inventories: Inventory[];
 
   @CreateDateColumn()
   createdAt: Date;

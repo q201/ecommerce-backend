@@ -1,4 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
+  JoinColumn,
+} from 'typeorm';
 import { Product } from '../../products/entities/product.entity';
 import { StockMovement } from './stock-movement.entity';
 import { Warehouse } from './warehouse.entity';
@@ -48,11 +57,13 @@ export class Inventory {
   updatedAt: Date;
 
   @ManyToOne(() => Product, product => product.inventories)
+  @JoinColumn({ name: 'productId' })
   product: Product;
 
   @ManyToOne(() => Warehouse, warehouse => warehouse.inventories)
+  @JoinColumn({ name: 'warehouseId' })
   warehouse: Warehouse;
 
   @OneToMany(() => StockMovement, movement => movement.inventory)
   stockMovements: StockMovement[];
-} 
+}
