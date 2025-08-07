@@ -1,10 +1,15 @@
 import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+<<<<<<< HEAD
 import { Repository, Not } from 'typeorm';
+=======
+import { Repository,Not } from 'typeorm';
+>>>>>>> master
 import { Wishlist } from './entities/wishlist.entity';
 import { WishlistItem } from './entities/wishlist-item.entity';
 import { CreateWishlistDto } from './dtos/create-wishlist.dto';
 import { AddItemDto } from './dtos/add-item.dto';
+
 
 @Injectable()
 export class WishlistService {
@@ -19,14 +24,14 @@ export class WishlistService {
     // If this is set as default, remove default from other wishlists
     if (createWishlistDto.isDefault) {
       await this.wishlistRepository.update(
-        { userId, isDefault: true },
+        { isDefault: true },
         { isDefault: false }
       );
     }
 
     const wishlist = this.wishlistRepository.create({
       ...createWishlistDto,
-      userId,
+      userId: userId,
     });
 
     return await this.wishlistRepository.save(wishlist);
@@ -79,6 +84,7 @@ export class WishlistService {
 
     return wishlist;
   }
+
 
   async updateWishlist(id: string, userId: string, updateData: Partial<Wishlist>): Promise<Wishlist> {
     const wishlist = await this.getWishlistById(id, userId);
@@ -150,7 +156,7 @@ export class WishlistService {
       relations: ['wishlist'],
     });
 
-    if (!item || item.wishlist.userId !== userId) {
+    if (!item || item.wishlist.user.id !== userId) {
       throw new NotFoundException(`Wishlist item with ID ${itemId} not found`);
     }
 
@@ -164,7 +170,7 @@ export class WishlistService {
       relations: ['wishlist'],
     });
 
-    if (!item || item.wishlist.userId !== userId) {
+    if (!item || item.wishlist.user.id !== userId) {
       throw new NotFoundException(`Wishlist item with ID ${itemId} not found`);
     }
 
@@ -186,7 +192,7 @@ export class WishlistService {
       relations: ['wishlist'],
     });
 
-    if (!item || item.wishlist.userId !== userId) {
+    if (!item || item.wishlist.user.id !== userId) {
       throw new NotFoundException(`Wishlist item with ID ${itemId} not found`);
     }
 
@@ -220,7 +226,14 @@ export class WishlistService {
   async getWishlistAnalytics(userId: string): Promise<any> {
     const wishlists = await this.getUserWishlists(userId);
     
-    const analytics = {
+    const analytics: {
+      totalWishlists: number;
+      totalItems: number;
+      publicWishlists: number;
+      averageItemsPerWishlist: number;
+      mostPopularProducts: { productId: string; count: number }[];
+      priceRange: { min: number; max: number; average: number };
+    } = {
       totalWishlists: wishlists.length,
       totalItems: 0,
       publicWishlists: 0,
@@ -256,17 +269,38 @@ export class WishlistService {
     analytics.priceRange.average = itemCount > 0 ? totalPrice / itemCount : 0;
 
     // Get most popular products
+<<<<<<< HEAD
     analytics.mostPopularProducts = Object.entries(productCounts)
       .sort(([,a], [,b]) => (b as number) - (a as number))
+=======
+    analytics.mostPopularProducts = (Object.entries(productCounts) as [string, number][])
+      .sort(([,a], [,b]) => b - a)
+>>>>>>> master
       .slice(0, 10)
       .map(([productId, count]) => ({ productId, count }));
 
     return analytics;
   }
-
-  async checkPriceDrops(userId: string): Promise<any[]> {
+  
+  async checkPriceDrops(userId: string): Promise<{
+    itemId: string;
+    productId: string;
+    wishlistName: string;
+    originalPrice: number;
+    currentPrice: number;
+    dropPercentage: string;
+    savings: number;
+  }[]> {
     const wishlists = await this.getUserWishlists(userId);
-    const priceDrops = [];
+    const priceDrops: {
+      itemId: string;
+      productId: string;
+      wishlistName: string;
+      originalPrice: number;
+      currentPrice: number;
+      dropPercentage: string;
+      savings: number;
+    }[] = [];
 
     for (const wishlist of wishlists) {
       for (const item of wishlist.items) {
@@ -285,8 +319,9 @@ export class WishlistService {
       }
     }
 
-    return priceDrops.sort((a, b) => b.dropPercentage - a.dropPercentage);
+    return priceDrops.sort((a, b) => parseFloat(b.dropPercentage) - parseFloat(a.dropPercentage));
   }
+
 
   async shareWishlist(wishlistId: string, userId: string): Promise<{ shareUrl: string; shareCode: string }> {
     const wishlist = await this.getWishlistById(wishlistId, userId);

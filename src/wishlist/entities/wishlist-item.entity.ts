@@ -6,7 +6,7 @@ export class WishlistItem {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column('uuid')
   wishlistId: string;
 
   @Column()

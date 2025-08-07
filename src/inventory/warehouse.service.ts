@@ -2,6 +2,7 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Warehouse } from './entities/warehouse.entity';
+import { CreateWarehouseDto } from './dtos/create-warehouse.dto';
 
 @Injectable()
 export class WarehouseService {
@@ -10,8 +11,12 @@ export class WarehouseService {
     private warehouseRepository: Repository<Warehouse>,
   ) {}
 
-  async create(createWarehouseDto: any): Promise<Warehouse> {
+  async create(createWarehouseDto: CreateWarehouseDto): Promise<Warehouse> {
     // Check if warehouse code already exists
+    if (Array.isArray(createWarehouseDto)) {
+      throw new BadRequestException('Expected a single warehouse object, but received an array');
+    }
+
     const existingWarehouse = await this.warehouseRepository.findOne({
       where: { code: createWarehouseDto.code },
     });
