@@ -70,10 +70,12 @@ export interface Variant {
 export interface Review {
   id: string;
   rating: number;
+  title: string;
   comment: string;
   user: User;
   product: Product;
   createdAt: Date;
+  updatedAt: Date;
 }
 
 // Order Types
@@ -95,7 +97,8 @@ export interface Order {
   items: OrderItem[];
   billing_address?: OrderAddress;
   shipping_address?: OrderAddress;
-  customer: User;
+  user?: User;
+  customer?: User;
 }
 
 export enum OrderStatus {
@@ -189,4 +192,22 @@ export interface PaginatedResponse<T> {
   page: number;
   limit: number;
   totalPages: number;
+}
+
+// Additional utility types
+export type CreateProductData = Omit<Product, 'id' | 'createdAt' | 'updatedAt'>;
+export type UpdateProductData = Partial<Omit<Product, 'id' | 'createdAt' | 'updatedAt'>>;
+export type CreateAddressData = Omit<Address, 'id'>;
+export type UpdateAddressData = Partial<Omit<Address, 'id'>>;
+
+// Notification Types
+export interface Notification {
+  id: string;
+  type: 'order' | 'promotion' | 'system' | 'security';
+  title: string;
+  message: string;
+  isRead: boolean;
+  createdAt: Date;
+  actionUrl?: string;
+  actionText?: string;
 }
