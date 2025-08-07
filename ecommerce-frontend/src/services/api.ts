@@ -202,6 +202,72 @@ class ApiService {
   async changePassword(passwordData: { currentPassword: string; newPassword: string }): Promise<void> {
     await this.api.post('/auth/change-password', passwordData);
   }
+
+  // Admin endpoints
+  async getAllUsers(): Promise<User[]> {
+    const response: AxiosResponse<User[]> = await this.api.get('/users');
+    return response.data;
+  }
+
+  async deleteUser(userId: string): Promise<void> {
+    await this.api.delete(`/users/${userId}`);
+  }
+
+  async getAllOrders(): Promise<Order[]> {
+    const response: AxiosResponse<Order[]> = await this.api.get('/orders/all');
+    return response.data;
+  }
+
+  async updateOrderStatus(orderId: string, status: string): Promise<Order> {
+    const response: AxiosResponse<Order> = await this.api.patch(`/orders/${orderId}/status`, { status });
+    return response.data;
+  }
+
+  async createProduct(productData: any): Promise<Product> {
+    const response: AxiosResponse<Product> = await this.api.post('/products', productData);
+    return response.data;
+  }
+
+  async updateProduct(productId: string, productData: any): Promise<Product> {
+    const response: AxiosResponse<Product> = await this.api.patch(`/products/${productId}`, productData);
+    return response.data;
+  }
+
+  async deleteProduct(productId: string): Promise<void> {
+    await this.api.delete(`/products/${productId}`);
+  }
+
+  async getCategories(): Promise<Category[]> {
+    const response: AxiosResponse<Category[]> = await this.api.get('/categories');
+    return response.data;
+  }
+
+  async getCategoryBySlug(slug: string): Promise<Category> {
+    const response: AxiosResponse<Category> = await this.api.get(`/categories/slug/${slug}`);
+    return response.data;
+  }
+
+  // Notification endpoints
+  async getNotifications(): Promise<any[]> {
+    const response: AxiosResponse<any[]> = await this.api.get('/notifications');
+    return response.data;
+  }
+
+  async markNotificationAsRead(notificationId: string): Promise<void> {
+    await this.api.patch(`/notifications/${notificationId}/read`);
+  }
+
+  async markAllNotificationsAsRead(): Promise<void> {
+    await this.api.patch('/notifications/read-all');
+  }
+
+  async deleteNotification(notificationId: string): Promise<void> {
+    await this.api.delete(`/notifications/${notificationId}`);
+  }
+
+  async clearAllNotifications(): Promise<void> {
+    await this.api.delete('/notifications');
+  }
 }
 
 export const apiService = new ApiService();

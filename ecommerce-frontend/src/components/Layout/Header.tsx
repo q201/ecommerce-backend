@@ -107,6 +107,9 @@ const Header: React.FC = () => {
                   <Link to="/reviews" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     My Reviews
                   </Link>
+                  <Link to="/notifications" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Notifications
+                  </Link>
                   <div className="border-t border-gray-100 my-1"></div>
                   <button
                     onClick={handleLogout}
@@ -195,6 +198,13 @@ const Header: React.FC = () => {
                     onClick={() => setIsMenuOpen(false)}
                   >
                     My Reviews
+                  </Link>
+                  <Link
+                    to="/notifications"
+                    className="block px-3 py-2 text-gray-700 hover:text-primary-600"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Notifications
                   </Link>
                 </>
               )}

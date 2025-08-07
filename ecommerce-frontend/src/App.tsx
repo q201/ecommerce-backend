@@ -16,6 +16,11 @@ import SearchResults from './pages/SearchResults';
 import Wishlist from './pages/Wishlist';
 import Reviews from './pages/Reviews';
 import AdminDashboard from './pages/AdminDashboard';
+import ProductManagement from './pages/admin/ProductManagement';
+import OrderManagement from './pages/admin/OrderManagement';
+import UserManagement from './pages/admin/UserManagement';
+import CategoryPage from './pages/CategoryPage';
+import NotificationCenter from './pages/NotificationCenter';
 
 function App() {
   return (
@@ -36,7 +41,12 @@ function App() {
               <Route path="/search" element={<SearchResults />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/reviews" element={<Reviews />} />
+              <Route path="/notifications" element={<NotificationCenter />} />
+              <Route path="/category/:slug" element={<CategoryPage />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/products" element={<ProductManagement />} />
+              <Route path="/admin/orders" element={<OrderManagement />} />
+              <Route path="/admin/users" element={<UserManagement />} />
             </Routes>
           </Layout>
         </CartProvider>
