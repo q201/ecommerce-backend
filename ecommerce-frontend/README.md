@@ -1,46 +1,175 @@
-# Getting Started with Create React App
+# 🛍️ ShopHub - E-commerce Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive e-commerce frontend built with React, TypeScript, and Tailwind CSS.
 
-## Available Scripts
+## ✨ Features
 
-In the project directory, you can run:
+### 🏠 **Pages**
+- **Home Page** - Hero section, features, categories, and call-to-action
+- **Products Page** - Product listing with filters, search, and grid/list views
+- **Product Detail Page** - Detailed product view with image gallery, reviews, and add to cart
+- **Cart Page** - Shopping cart management with quantity updates
+- **Checkout Page** - Multi-step checkout process with address and payment forms
+- **Login/Register Pages** - User authentication with form validation
 
-### `npm start`
+### 🎨 **Design & UX**
+- **Modern UI** - Clean, professional design with Tailwind CSS
+- **Responsive Design** - Mobile-first approach, works on all devices
+- **Interactive Elements** - Hover effects, loading states, and smooth transitions
+- **Accessibility** - Proper ARIA labels and keyboard navigation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 🔧 **Functionality**
+- **Authentication** - JWT-based auth with context management
+- **Shopping Cart** - Add, remove, and update cart items
+- **Product Management** - Search, filter, and sort products
+- **Wishlist** - Save products for later
+- **Order Management** - Complete checkout flow
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🚀 Getting Started
 
-### `npm test`
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Installation
 
-### `npm run build`
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd ecommerce-frontend
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Open your browser**
+   Navigate to `http://localhost:3000`
 
-### `npm run eject`
+## 📁 Project Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+src/
+├── components/          # Reusable UI components
+│   ├── Layout/         # Header, Footer, Layout components
+│   └── ProductCard.tsx # Product display component
+├── context/            # React Context providers
+│   ├── AuthContext.tsx # Authentication state management
+│   └── CartContext.tsx # Shopping cart state management
+├── pages/              # Page components
+│   ├── Home.tsx        # Landing page
+│   ├── Login.tsx       # Login page
+│   ├── Register.tsx    # Registration page
+│   ├── Products.tsx    # Product listing page
+│   ├── ProductDetail.tsx # Product detail page
+│   ├── Cart.tsx        # Shopping cart page
+│   └── Checkout.tsx    # Checkout page
+├── services/           # API services
+│   └── api.ts         # API client and endpoints
+├── types/              # TypeScript type definitions
+│   └── index.ts       # All type interfaces
+├── hooks/              # Custom React hooks
+├── utils/              # Utility functions
+├── App.tsx            # Main app component
+└── index.css          # Global styles with Tailwind
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🛠️ Tech Stack
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **React Router** - Client-side routing
+- **Tailwind CSS** - Utility-first CSS framework
+- **Heroicons** - Icon library
+- **Axios** - HTTP client
+- **Context API** - State management
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 🎨 Design System
 
-## Learn More
+### Colors
+- **Primary**: Blue (#3B82F6 to #1E3A8A)
+- **Success**: Green (#10B981)
+- **Warning**: Yellow (#F59E0B)
+- **Error**: Red (#EF4444)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Components
+- **Buttons**: Primary, Secondary, Outline variants
+- **Cards**: Product cards, info cards
+- **Forms**: Input fields, validation states
+- **Badges**: Status indicators
+- **Loading**: Spinners and skeletons
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔌 API Integration
+
+The app is configured to work with your NestJS backend at `http://localhost:3000`. Key endpoints:
+
+- **Authentication**: `/auth/login`, `/auth/register`
+- **Products**: `/products`, `/products/:id`
+- **Cart**: `/cart`, `/cart/items`
+- **Orders**: `/orders`
+- **Users**: `/users/profile`
+
+## 📱 Responsive Breakpoints
+
+- **Mobile**: < 640px
+- **Tablet**: 640px - 1024px
+- **Desktop**: > 1024px
+
+## 🚀 Deployment
+
+### Build for Production
+```bash
+npm run build
+```
+
+### Deploy to Vercel/Netlify
+1. Connect your repository
+2. Set build command: `npm run build`
+3. Set output directory: `build`
+4. Deploy!
+
+## 🔧 Configuration
+
+### Environment Variables
+Create a `.env` file in the root directory:
+
+```env
+REACT_APP_API_URL=http://localhost:3000
+REACT_APP_APP_NAME=ShopHub
+```
+
+### Tailwind Configuration
+Customize colors, spacing, and components in `tailwind.config.js`.
+
+## 📝 Available Scripts
+
+- `npm start` - Start development server
+- `npm run build` - Build for production
+- `npm test` - Run tests
+- `npm run eject` - Eject from Create React App
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+## 🆘 Support
+
+For support, email support@shophub.com or create an issue in the repository.
+
+---
+
+**Built with ❤️ using React, TypeScript, and Tailwind CSS**
